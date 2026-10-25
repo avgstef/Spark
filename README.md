@@ -16,10 +16,6 @@
   <img alt="Made by avgstef" src="https://img.shields.io/badge/made%20by-avgstef-2b2b2b?style=flat-square">
 </p>
 
-<p align="center">
-  <img src="docs/studio.jpg" width="900" alt="Spark Studio — generate a prompt from an idea">
-</p>
-
 ---
 
 Spark is a **Windows desktop app** for writing better AI prompts. Type the half-formed thought you
@@ -37,7 +33,7 @@ Grab the file for your system from the [latest release](../../releases/latest). 
 to expand it.
 
 <details>
-<summary><b>&nbsp;🪟&nbsp; Windows 10 / 11 (64-bit)</b> &nbsp;—&nbsp; installer or portable</summary>
+<summary><b>&nbsp;💻&nbsp; Windows 10 / 11 (64-bit)</b> &nbsp;—&nbsp; installer or portable</summary>
 
 <br>
 
