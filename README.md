@@ -16,6 +16,10 @@
   <img alt="Made by avgstef" src="https://img.shields.io/badge/made%20by-avgstef-2b2b2b?style=flat-square">
 </p>
 
+<p align="center">
+  <img src="docs/studio.jpg" width="900" alt="Spark Studio — generate a prompt from an idea">
+</p>
+
 ---
 
 Spark is a **Windows desktop app** for writing better AI prompts. Type the half-formed thought you
@@ -29,9 +33,13 @@ No browser tabs, no blank text box, no prompt-engineering guesswork.
 
 ## ⬇️ Download
 
-Grab the file for your system from the [latest release](../../releases/latest).
+Grab the file for your system from the [latest release](../../releases/latest). Click your platform
+to expand it.
 
-💻 **Windows**
+<details>
+<summary><b>&nbsp;🪟&nbsp; Windows 10 / 11 (64-bit)</b> &nbsp;—&nbsp; installer or portable</summary>
+
+<br>
 
 | File | Type | Best for |
 | --- | --- | --- |
@@ -42,7 +50,12 @@ Grab the file for your system from the [latest release](../../releases/latest).
 > **More info → Run anyway**. That's Windows being cautious about a new publisher, not a warning
 > about the app.
 
-⚙️ **Linux**
+</details>
+
+<details>
+<summary><b>&nbsp;🐧&nbsp; Linux (64-bit)</b> &nbsp;—&nbsp; build from source</summary>
+
+<br>
 
 Spark runs on Linux and is tested there, but **no prebuilt binary is published yet** — you build it
 yourself in two commands. It takes a couple of minutes:
@@ -67,6 +80,8 @@ Full instructions, including building it without a Linux machine, are in
 > On a Linux desktop without a keyring (no GNOME Keyring or KWallet), Spark falls back to storing the
 > credential unencrypted in its app-data folder and says so in Settings. Install a keyring for
 > encrypted storage.
+
+</details>
 
 **Requirements:** Windows 10/11 or a modern 64-bit Linux · internet connection for generation ·
 no account, no signup.
