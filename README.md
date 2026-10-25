@@ -35,7 +35,7 @@ No browser tabs, no blank text box, no prompt-engineering guesswork.
 
 Grab the file for your system from the [latest release](../../releases/latest).
 
-🪟 **Windows**
+💻 **Windows**
 
 | File | Type | Best for |
 | --- | --- | --- |
