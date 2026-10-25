@@ -35,7 +35,7 @@ No browser tabs, no blank text box, no prompt-engineering guesswork.
 
 Grab the file for your system from the [latest release](../../releases/latest).
 
-**Windows**
+🪟 **Windows**
 
 | File | Type | Best for |
 | --- | --- | --- |
@@ -46,7 +46,7 @@ Grab the file for your system from the [latest release](../../releases/latest).
 > **More info → Run anyway**. That's Windows being cautious about a new publisher, not a warning
 > about the app.
 
-**Linux**
+⚙️ **Linux**
 
 Spark runs on Linux and is tested there, but **no prebuilt binary is published yet** — you build it
 yourself in two commands. It takes a couple of minutes:
