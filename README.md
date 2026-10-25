@@ -1,290 +1,178 @@
-# Spark
+<p align="center">
+  <img src="docs/logo.svg" width="88" alt="Spark logo">
+</p>
 
-**Turn your ideas into perfect AI prompts.**
+<h1 align="center">Spark</h1>
 
-A local-first desktop app (Electron + React + TypeScript). Describe an idea, pick a capability level,
-and Spark writes a structured, paste-ready prompt — role, constraints, output format and quality bar
-included. Library, history, templates and a quality analyzer ship with it.
+<p align="center">
+  <b>Turn rough ideas into paste-ready AI prompts — on your desktop, in seconds.</b>
+</p>
 
-**Design:** obsidian black, warm gold. Every surface is outlined with a thin, slightly translucent
-gold hairline rather than a heavy border, so the interface reads as premium without shouting. Two
-themes ship: `obsidian` (default) and `ember` (a warmer charcoal variant). The wallpaper is a bespoke
-golden neural-lattice artwork bundled into the app, so it works offline and inside the packaged exe.
+<p align="center">
+  <a href="../../releases/latest"><img alt="Download" src="https://img.shields.io/badge/download-latest%20release-f5b841?style=flat-square"></a>
+  <img alt="Platform" src="https://img.shields.io/badge/platform-Windows%2010%20%7C%2011%20(64--bit)-2b2b2b?style=flat-square">
+  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-b8791f?style=flat-square">
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-f5b841?style=flat-square">
+  <img alt="Made by avgstef" src="https://img.shields.io/badge/made%20by-avgstef-2b2b2b?style=flat-square">
+</p>
 
----
-
-## Table of contents
-
-1. [What it does](#1-what-it-does)
-2. [This is a desktop app](#2-this-is-a-desktop-app)
-3. [Quick start](#3-quick-start)
-4. [Build your own Windows .exe](#4-build-your-own-windows-exe)
-5. [How the credential is protected](#5-how-the-credential-is-protected)
-6. [Capability levels](#6-capability-levels)
-7. [Project structure](#7-project-structure)
-8. [How the engine works](#8-how-the-engine-works)
-9. [Troubleshooting](#9-troubleshooting)
-10. [Before you publish](#10-before-you-publish)
+<p align="center">
+  <img src="docs/studio.jpg" width="900" alt="Spark Studio — generate a prompt from an idea">
+</p>
 
 ---
 
-## 1. What it does
+Spark is a **Windows desktop app** for writing better AI prompts. Type the half-formed thought you
+actually have — *"habit tracker for iOS"*, *"cinematic product shot of an earbud case"* — and Spark
+writes a complete prompt with a role, an objective, real constraints, an output format and a quality
+score you can act on.
 
-| Feature | Description |
-| --- | --- |
-| **Studio** | Describe an idea, choose a category and capability level. Spark writes a full prompt with role, context, constraints, output format and quality bar. |
-| **Smart clarification** | Before generating, Spark can ask up to 3 high-leverage questions. Skip them and it records every assumption instead. |
-| **Prompt Lab** | Paste any prompt and run Improve / Expand / Simplify / Change tone / Fix ambiguity / Adapt — each with a written change log. |
-| **Quality Analyzer** | Scores a prompt 0–100 across clarity, completeness, specificity, structure and constraints, lists weaknesses and offers a rewrite. |
-| **Library** | Save, tag, favourite, search, sort and export as Markdown. Local only. |
-| **History** | Every generation is recorded so you can restore an idea or promote it to the library. |
-| **Templates** | 16 curated seed ideas across eight categories. |
-| **Local fallback engine** | With no credential configured the app still works using a deterministic heuristic engine, clearly labelled so results are never passed off as model output. |
+No browser tabs, no blank text box, no prompt-engineering guesswork.
 
 ---
 
-## 2. This is a desktop app
+## ⬇️ Download
 
-| | Browser preview (`npm run dev`) | The built app (`npm run dist:win`) |
+Grab either file from the [latest release](../../releases/latest). They're the same app — pick one.
+
+| File | Type | Best for |
 | --- | --- | --- |
-| Runs in | Chrome/Edge at `localhost:5173` | Its own native window, no browser |
-| Launch | you start a dev server | desktop / Start-menu shortcut |
-| Icon | none | Spark icon in taskbar, Alt-Tab, Start menu |
-| Credential | browser localStorage | sealed in the build + OS keystore for your own |
-| Data | browser localStorage | `%APPDATA%\Spark` |
-| Window | browser chrome | frameless, custom title bar, remembers size and position |
+| **`Spark-Setup-1.0.0.exe`** | Installer | Start-menu and desktop shortcuts, easy uninstall |
+| **`Spark-1.0.0-x64.exe`** | Portable | One file, no install — run from a USB stick or a second PC |
 
-Only the *preview* is a web page. The deliverable is a normal Windows program.
+> **First launch may show "Windows protected your PC".** Spark isn't code-signed yet, so click
+> **More info → Run anyway**. That's Windows being cautious about a new publisher, not a warning
+> about the app.
 
----
-
-## 3. Quick start
-
-Requirements: **Node.js 22.12 or newer** (24 LTS ideal) — <https://nodejs.org>
-
-```bash
-npm install
-npm start          # builds, then opens the real desktop window
-```
-
-Browser preview only (no desktop shell):
-
-```bash
-npm run dev        # http://localhost:5173
-```
-
-The build ships with a sealed credential, so it works immediately. To use your own, open
-**Settings → Access key** and paste it.
+**Requirements:** Windows 10 or 11, 64-bit · internet connection for generation · no account, no signup.
 
 ---
 
-## 4. Build your own Windows .exe
+## 🚀 Quick start
 
-On Windows, in the project folder:
+1. **Open Spark** and type your idea into the box on the left.
+2. **Press Generate prompt** (or `Ctrl` + `Enter`).
+3. **Copy it**, save it to your Library, or send it to Prompt Lab to refine it.
 
-```bat
-build-windows.bat
-```
-
-That runs `scripts/build-win.mjs`, which checks your Node version, type-checks, bundles, packages,
-writes everything to `build-log.txt`, and keeps the window open so failures are readable.
-
-Equivalent manual steps:
-
-```bat
-npm install
-npm run build:win
-```
-
-Artifacts land in `release/`:
-
-| File | What it is |
-| --- | --- |
-| `Spark-Setup-1.0.0.exe` | NSIS installer — Start-menu + desktop shortcut, choose folder |
-| `Spark-1.0.0-x64.exe` | Portable build, runs without installing |
-
-Also available: `npm run pack:dir` (unpacked, fastest sanity check), `npm run dist:linux` (AppImage).
+The prompt starts appearing in about a second, so you can read while it finishes writing.
 
 ---
 
-## 5. How the credential is protected
+## ✨ What you can do
 
-Spark is built so the credential is not readable from the UI or the shipped web bundle.
-
-```
-React UI  ──IPC──▶  Electron main process  ──HTTPS──▶  generation service
-(no key)            (owns the credential)
-```
-
-**What is protected**
-
-1. **The key never enters the renderer.** The preload bridge exposes only `engine(kind, payload)`.
-   There is no API to read a key — by design, not by convention.
-2. **Provider identity is masked.** The endpoint, auth header and upstream model identifiers are
-   stored base64-encoded in `electron/engine.cjs` and assembled at runtime, so grepping the source
-   or the packaged app finds no provider name.
-3. **The key is sealed.** `electron/vault.dat` holds it masked with a rotating keystream
-   (`scripts/seal-key.mjs`). No plaintext key exists in the repo.
-4. **The web bundle is clean.** The dev-only network path is guarded by `import.meta.env.DEV`, which
-   the bundler folds to `false` in production. Verified: the shipped `dist/` contains no endpoint,
-   no auth header, no model id, no key, and a CSP with `connect-src 'self'`.
-5. **Your own key** (if you add one in Settings) is encrypted with the OS keystore — DPAPI on
-   Windows, Keychain on macOS, libsecret on Linux.
-
-**Sealing a different key**
-
-```bash
-node scripts/seal-key.mjs "YOUR_KEY"
-node scripts/seal-key.mjs --from-file spark.key    # then delete spark.key
-```
-
-**What this is not.** This is obfuscation, not encryption. A determined person running the app can
-recover the key it uses, because the app must be able to use it. It stops casual copying — reading
-the source, unzipping the installer, grepping the bundle — not reverse engineering. Section 10
-covers what to do before distributing widely.
-
----
-
-## 6. Capability levels
-
-The UI exposes three levels only. The mapping to upstream models is internal.
-
-| Level | Behaviour |
-| --- | --- |
-| **Low** | Fastest responses, lightest reasoning |
-| **Medium** | Balanced depth and speed — default |
-| **High** | Deepest reasoning, slower and more thorough |
-
-Set the default in **Settings → Capability**, override per prompt in **Studio**.
-
-Each level is a **chain of models**, not a single model. The engine walks the chain: if one is out of
-daily capacity or unavailable, the next one answers instead of failing. That is why a level keeps
-working after its first-choice model hits a limit.
-
-| Level | Chain (in order) | Typical answer |
+| | Feature | What it does |
 | --- | --- | --- |
-| Low | lightest → fast → light | ~2 s |
-| Medium | balanced → deep → light | ~4 s |
-| High | deep (extra reasoning) → deep → balanced → light | ~5 s |
-
-Measured on the shipped prompt and schema, one prompt, first attempt: **2.0 s / 4.1 s / 4.9 s**.
-See §8 for what makes it fast.
+| ✍️ | **Studio** | Idea in, structured prompt out — with live writing while it generates |
+| 🧠 | **Smart Clarification** | Asks up to three sharp questions when your idea has a real gap, and skips them when it doesn't |
+| 🎯 | **Category Intelligence** | Eight categories, each with its own strategy — coding prompts get stack and acceptance criteria, image prompts get lens, lighting and a negative list |
+| 🧪 | **Prompt Lab** | Rewrite, tighten or re-angle an existing prompt and see exactly what changed |
+| 📊 | **Quality Analyzer** | Scores any prompt on clarity, completeness, specificity, structure and constraints, then lists what to fix |
+| 📚 | **Library & History** | Everything you generate is saved, searchable and one click from the clipboard |
+| 🧩 | **Templates** | Ready-made starting points for the jobs people actually do |
+| 🔒 | **Private by design** | Credential sealed on your machine, no telemetry, no account |
 
 ---
 
-## 7. Project structure
+## ⚡ Three capability levels
+
+Pick a level in Settings, or override it per prompt in Studio.
+
+| Level | Feel | First words | Full prompt |
+| --- | --- | --- | --- |
+| **Low** | Fastest, lightest | ~0.9 s | ~2 s |
+| **Medium** | Balanced (default) | ~1.0 s | ~4 s |
+| **High** | Thinks harder, most thorough | ~1.6 s | ~5 s |
+
+A stalled request is abandoned after 8 seconds and retried on a backup engine, so you get an answer
+instead of a spinner. Daily request limits apply per level on a free-tier key — if one level runs out,
+switch levels and keep working.
+
+---
+
+## 🔐 Your data stays yours
+
+- The credential is stored in an **encrypted vault on your PC**. It's never shown in the interface and
+  never ships inside the app bundle.
+- **No account, no telemetry, no analytics.** Nothing is uploaded anywhere except the generation
+  request itself, sent straight from your PC to the AI service — there is no Spark server in between.
+- Prompts, history and settings live in your local app-data folder. **Settings → Clear local data**
+  wipes them.
+
+---
+
+## 🛠 Troubleshooting
+
+| Symptom | Fix |
+| --- | --- |
+| Windows says "protected your PC" | **More info → Run anyway** — the build isn't code-signed yet |
+| "The service rejected the credential" | Settings → **Test connection** |
+| "Daily capacity for this level is used up" | Switch capability level, or try again tomorrow |
+| "That took too long" | Already retried automatically. Try Medium or Low |
+| Blank window on launch | Run `npm run build` first — the app loads `dist/index.html` |
+| Missing styles in the app | Keep `base: './'` in `vite.config.ts` — absolute paths break under `file://` |
+
+---
+
+## 🧑‍💻 Build it yourself
+
+<details>
+<summary><b>Requirements: Node.js 22.12+ and npm</b></summary>
+
+<br>
+
+```bash
+npm install          # install dependencies
+npm run dev          # run the UI in a browser for fast iteration
+npm start            # build, then launch the real desktop app
+npm run build:win    # produce the Windows installer + portable .exe in release/
+```
+
+On Windows you can also just double-click **`build-windows.bat`** (or `build-windows.ps1`) — it
+checks your Node version, builds, logs everything to `build-log.txt` and waits at the end so the
+window never vanishes.
+
+Output:
+
+```
+release/Spark-Setup-1.0.0.exe     # installer
+release/Spark-1.0.0-x64.exe       # portable
+```
+
+</details>
+
+<details>
+<summary><b>Project structure</b></summary>
+
+<br>
 
 ```
 spark/
 ├── electron/
-│   ├── main.cjs          # window, IPC, security lockdown, window-state persistence
-│   ├── preload.cjs       # the only UI↔OS bridge; no credential access
-│   ├── engine.cjs        # masked config, tier mapping, vault unsealing, transport
-│   ├── store.cjs         # encrypted settings + credential source resolution
+│   ├── main.cjs          # window, IPC, security lockdown
+│   ├── preload.cjs       # the only UI↔OS bridge — no credential access
+│   ├── engine.cjs        # capability chains, streaming transport, error mapping
+│   ├── store.cjs         # settings + credential resolution
 │   └── vault.dat         # sealed credential
-├── scripts/
-│   ├── build-win.mjs     # guarded build runner with full logging
-│   └── seal-key.mjs      # writes vault.dat
 ├── src/
-│   ├── App.tsx           # shell: wallpaper, titlebar, sidebar, views, toasts
-│   ├── styles.css        # design system, glass surfaces, animations, themes
-│   ├── assets/
-│   │   └── spark-bg.jpg  # bundled wallpaper
-│   ├── components/
-│   │   ├── Icon.tsx      # inline SVG icon set + brand mark
-│   │   ├── Sidebar.tsx   # grouped nav, animated states
-│   │   ├── TitleBar.tsx  # frameless window chrome
-│   │   └── ui.tsx        # Card, Button, Field, Ring, Meter, Modal…
-│   ├── views/            # Studio, PromptLab, Analyzer, Library, History, Templates, Settings
-│   └── lib/
-│       ├── api.ts        # single API surface (IPC in app, dev shim in browser)
-│       ├── devTransport.ts # dev-only constants; dropped from production builds
-│       ├── appState.tsx  # settings, library, history, toasts, routing
-│       ├── localEngine.ts# heuristic fallback
-│       ├── partial.ts    # reads half-written streamed JSON for the live view
-│       ├── templates.ts  # template catalogue
-│       ├── storage.ts    # local persistence, export, view handoff
-│       └── types.ts      # domain types
-├── resources/icon.png    # 1024² app icon (kept out of build/ on purpose)
-├── build-windows.bat     # one-click build (CRLF — do not convert)
+│   ├── App.tsx           # shell: wallpaper, titlebar, sidebar, routing
+│   ├── styles.css        # design system — black, white and gold
+│   ├── views/            # Studio, Prompt Lab, Analyzer, Library, History, Templates, Settings
+│   ├── components/       # Icon set, Sidebar, TitleBar, UI primitives
+│   └── lib/              # api, app state, storage, templates, streaming helpers
+├── resources/            # app icon and wallpaper
+├── docs/                 # logo and screenshots used in this README
+├── build-windows.bat     # one-click Windows build
 └── README.md
 ```
 
----
-
-## 8. How the engine works
-
-Four operations, all returning **structured JSON** via `responseSchema` so the UI never parses prose:
-
-| Kind | Returns |
-| --- | --- |
-| `generate` | `title, category, objective, brief, prompt, assumptions[], tips[], quality{}` |
-| `clarify` | `needsClarification, reason, questions[]` (max 3) |
-| `lab` | `prompt, changes[], notes` |
-| `analyze` | `overall, scores{5}, strengths[], weaknesses[], fixes[], rewritten` |
-
-The shared system instruction enforces a paste-ready prompt with no meta commentary, measurable
-constraints instead of adjectives, explicit assumptions instead of silent guesses, and a defined
-output format plus quality bar. Per-category strategies live in `CATEGORY_GUIDANCE`.
-
-### Why it is fast
-
-Four things, in order of impact:
-
-1. **Right-sized work per level.** The heavy model with a large output ceiling and no reasoning cap
-   answered the same prompt in **69 s**; it spent most of that time thinking and writing far more
-   tokens than the schema needs. The output ceiling is now 3072 tokens, reasoning is bounded per
-   level, and each level starts on the cheapest model that still produces a full-quality prompt.
-2. **Streaming, end to end.** Answers arrive over SSE and are painted while they are written. The
-   first line is visible in **0.7–1.6 s**, so perceived speed is far better than the totals above.
-3. **Watchdogs instead of long waits.** A stalled request is abandoned after 8 s without a first
-   token and the next model in the chain takes over, under a 32 s budget for the whole call. There is
-   no two-minute hang.
-4. **Capacity-aware retries.** A "daily capacity used up" reply is never retried on the same model —
-   it is remembered for the rest of the day and the chain moves on. Transient overloads get exactly
-   one retry.
-
-Clarification runs on the fastest level on purpose: it is a small routing decision that sits in front
-of the real work, so a deep model there would add seconds to every generation.
-
-Failure handling: bounded timeouts, per-model capacity tracking, retries on 429/503/500, HTTP status
-→ human-readable messages (with provider internals scrubbed from the text), partial-JSON salvage for
-the live view, malformed-JSON recovery, and a clean path to the local engine when no credential
-exists.
+</details>
 
 ---
 
-## 9. Troubleshooting
+## 🧡 Credits
 
-| Symptom | Fix |
-| --- | --- |
-| Build window closes instantly | Re-download — the `.bat` had LF endings in an early copy. Also requires Node 22.12+. |
-| "The service rejected the credential" | Settings → *Test connection*. Confirm the key is enabled with the provider. |
-| "Rate limit reached" | Wait ~30 s; the engine already retries once. Try the Low level meanwhile. |
-| "Daily capacity for this level is used up" | The free tier allows 20 requests per day per model. Switch level — each level starts on a different model, and the chain moves on automatically. |
-| "That took too long" | The engine abandons stalled requests after 8 s and moves on. If it persists, use Medium or Low. |
-| Blank window after `npm start` | Run `npm run build` first — the window loads `dist/index.html`. |
-| Styles missing in the app | Keep `base: './'` in `vite.config.ts` — absolute paths break under `file://`. |
+Designed and built by **avgstef**.
 
----
+If Spark saves you time, a ⭐ on the repo goes a long way.
 
-## 10. Before you publish
-
-The app ships with a working credential so it runs out of the box. That also means **anyone who has
-the installer can extract and use it.** Before publishing or sharing widely:
-
-- **Rotate the key** with your provider and seal a new one: `node scripts/seal-key.mjs "NEW_KEY"`.
-- **Best option:** remove the sealed credential (`rm electron/vault.dat`) and let each user paste
-  their own in Settings. That keeps quota and billing isolated per user and is the flow the UI is
-  designed around.
-- **For a hosted or multi-user product:** proxy generation through a backend you control, with
-  per-user auth and rate limits. Never ship a shared key to many users.
-- Never commit `spark.key` — it is already in `.gitignore`.
-
-Other safeguards in place: `contextIsolation` and `sandbox` on, `nodeIntegration` off, CSP
-restricting the renderer to `'self'`, navigation locked so external links open in the browser,
-key-shaped input validated before saving, and a one-click local data wipe.
-
----
-
-MIT licensed. Built from the original product blueprint, shipped as Spark.
+MIT licensed · Copyright © 2026 Spark
