@@ -1,0 +1,13 @@
+import { chromium } from 'playwright'
+const browser = await chromium.launch({ executablePath: process.env.CHROME })
+const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2 })
+await page.goto('http://127.0.0.1:5176', { waitUntil: 'networkidle' })
+await page.waitForTimeout(1500)
+await page.locator('.hero-features').screenshot({ path: 'shots/zoom-features.png' })
+await page.locator('.tier-grid').screenshot({ path: 'shots/zoom-tiers.png' })
+await page.click('.nav-link:has-text("Settings")')
+await page.waitForTimeout(800)
+await page.locator('.tier-grid').screenshot({ path: 'shots/zoom-tiers-settings.png' })
+const credit = page.locator('.credit')
+if (await credit.count()) await credit.screenshot({ path: 'shots/zoom-credit.png' })
+await browser.close()

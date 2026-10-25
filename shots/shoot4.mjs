@@ -1,0 +1,15 @@
+import { chromium } from 'playwright'
+const browser = await chromium.launch({ executablePath: '/home/user/.cache/ms-playwright/chromium-1140/chrome-linux/chrome' })
+const page = await browser.newPage({ viewport: { width: 1440, height: 940 } })
+const errors = []
+page.on('pageerror', e => errors.push('PAGEERROR: ' + e.message))
+page.on('console', m => { if (m.type() === 'error') errors.push(m.text()) })
+await page.goto('http://127.0.0.1:5174', { waitUntil: 'networkidle' })
+await page.waitForTimeout(1200)
+await page.screenshot({ path: 'shots/s1-studio.png' })
+await page.click('.nav-link:has-text("Templates")'); await page.waitForTimeout(700)
+await page.screenshot({ path: 'shots/s2-templates.png' })
+await page.click('.nav-link:has-text("Settings")'); await page.waitForTimeout(700)
+await page.screenshot({ path: 'shots/s3-settings.png' })
+console.log(JSON.stringify({ errors }))
+await browser.close()
