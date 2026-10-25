@@ -1,0 +1,36 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# build output
+dist/
+dist-electron/
+release/
+build/*.ico
+*.exe
+*.AppImage
+*.dmg
+
+# secrets — never commit these
+.env
+.env.local
+.env.*.local
+spark.key
+*.key
+
+# dev artifacts
+shots/
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+coverage/
+
+# build diagnostics
+build-log.txt
+
+# generated icon variants
+resources/icon-512.png

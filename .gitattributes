@@ -1,0 +1,13 @@
+# Windows batch/PowerShell files MUST keep CRLF or CMD misparses them.
+*.bat  text eol=crlf
+*.cmd  text eol=crlf
+*.ps1  text eol=crlf
+
+# Shell scripts and everything else stay LF.
+*.sh   text eol=lf
+*.cjs  text eol=lf
+*.ts   text eol=lf
+*.tsx  text eol=lf
+*.css  text eol=lf
+*.json text eol=lf
+*.md   text eol=lf
